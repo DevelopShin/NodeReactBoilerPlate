@@ -1,25 +1,10 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 
-
-export const Icon =styled(Link)`
-    // margin-left: 20px;
-    margin-top:32px;
-    text-decoration:none;
-    color: #fff;
-    font-weight: 700;
-    font-size: 30px;
-
-    @media screen and (max-width: 480) {
-      margin-left: 10px;
-      margin-top: 8px;
-    }
-`;
-
-export const LoginFormWrap=styled.div`
-    z-index:100;
+export const LoginFormWrap = styled.div`
+    z-index:22;
     bottom: 0;
     left:0;
     right:0;
@@ -32,16 +17,26 @@ export const LoginFormWrap=styled.div`
     background: rgba(11,19,30,.35);
 `;
 
-
+export const CloseBtn = styled.span`
+  display: flex;
+  color:#fff;
+  align-items: center;
+  cursor: pointer;
+  justify-content:right;
+  font-weight: 350;
+  height: 30px;
+  cursor:default;
+  font-size: 30px;
+`
 
 export const FormContent = styled.div`
-    z-index:91;
+    z-index:23;
     display: flex;
     flex-direction:column;
     justify-content: center;
     width: 312px;
-    padding:24px;
-
+    padding:15px 20px 15px 20px;
+    border-radius: 6px;
     background: #010101;
     
     @media screen and (max-width: 480px) {
@@ -60,23 +55,17 @@ export const Form = styled.form`
     // }
 `
 
-export const FormH1 = styled.h1`
+export const LogoIcon = styled.div`
     display:inline-block;
     margin-bottom: 40px;
     color: #fff;
     font-size: 20px;
     font-weight: 400px;
     text-align: center;
+    cursor:default;
 `;
 
-export const FormLabel = styled.label`
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: #fff;
-`;
-
-
-export const FormInput =styled.input`
+export const FormInput = styled.input`
     padding: 15px 15px;
     margin-bottom: 32px;
     border: none;
@@ -94,19 +83,66 @@ export const FormButton = styled.button`
     `
 export const Text = styled.div`
     padding: 3px;
-    border-bottom: 1px solid #fff;
+    margin:auto 10px;
+    border-bottom: 1px solid #fff9;
     color: #fff;
     font-size: 12px;
 `;
 
-export const BotWrap = styled.div`
-    width: 100%;
+export const ColumnBox = styled.div`
     display: flex;
-    justify-content: space-between;
+    margin: auto;
 `
 export const BotLink = styled(Link)`
   decoration:none;
   text-align: center;
   text-decoration: none;
   color: inherit;
+`
+
+export const SocialWrap = styled.div`
+    width:312px;
+    height:77px;
+    display:flex;
+    margin-top:15px;
+    flex-direction:column;
+    align-items:center;
+`
+
+export const SocialIcon = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: ${({IcBgColor})=> IcBgColor};
+    width: 48px;
+    height: 44px;
+    color:${({IcColor})=> IcColor};
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+    margin:0 8px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 30px;
+`;
+
+export const Hr = styled.hr`
+    position: relative;
+    bottom: -9px;
+    display: block;
+    margin: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #fff9;
+    border: none;
+`;
+export const SocialText = styled.span`
+  padding: 0 8px;
+  margin-bottom: 16px;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: -.3px;
+  color: #abb0b5;
+  background:#000;
+  z-index: 1;
 `
