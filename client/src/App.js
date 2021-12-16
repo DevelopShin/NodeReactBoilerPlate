@@ -25,3 +25,10 @@ function App() {
 }
 
 export default App;
+
+/*  
+if auth
+        null   Anyone Can go inside 개나소나 접근가능
+        true   only logged in user can go inside  로그인 유저만 접근
+        false  logged in user can't go inside  로그인유저는 접근 금지 
+*/
