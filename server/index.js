@@ -4,18 +4,17 @@ const path = require("path");
 const cors = require('cors')
 const mongoose = require("mongoose");
 
-
-const config = require("./config/key");
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
+const config = require("./config/key");
 const connect = mongoose.connect(config.mongoURI)
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log(err));
 
-app.use(cors());
 
 const port = process.env.PORT || 5000;
-
 app.listen(port, () => {
   console.log(`Server Listening on http://localhost:${port}`)
 });
@@ -35,8 +34,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-
-//router
+//===============API Router===============================================================================//
 
 app.get('/',(req,res)=>{
   res.json({Success:true})

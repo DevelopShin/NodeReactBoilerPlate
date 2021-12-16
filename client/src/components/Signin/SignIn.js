@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom'
 import React, { useState } from 'react'
 import { Formik } from "formik";
 import * as Yup from 'yup';
-import Simplert from 'react-simplert'
 import swal from 'sweetalert'  //https://sweetalert.js.org/guides/
 
 function SignIn(props) {

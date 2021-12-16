@@ -32,28 +32,6 @@ export  const validationSchema=Yup.object().shape({
       .required('Confirm Password is required')
   });
 
-export  const onSubmit=(values, { setSubmitting }) => {
-    setTimeout(() => {
 
-      let dataToSubmit = {
-        email: values.email,
-        password: values.password,
-        name: values.name,
-        lastname: values.lastname,
-        // image: `http://gravatar.com/avatar/${moment().unix()}?d=identicon`
-      };
-      console.log(dataToSubmit)
-
-      // dispatch(registerUser(dataToSubmit)).then(response => {
-      //   if (response.payload.success) {
-      //     props.history.push("/login");
-      //   } else {
-      //     alert(response.payload.err.errmsg)
-      //   }
-      // })
-
-      setSubmitting(false);
-    }, 500);
-  }
 
 

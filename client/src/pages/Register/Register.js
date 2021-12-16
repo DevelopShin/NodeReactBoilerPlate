@@ -1,14 +1,37 @@
-import React, { useState, useEffect } from 'react'
-import { initialValues, validationSchema, onSubmit } from './CheckForm'
-
 import {
   Container, FormWrap, FormContent, Form,
-  FormH1, FormInput, FormButton, Text, ErrLabel
+  FormH1, FormInput, FormButton, ErrLabel
 } from './RegisterElements'
+import React from 'react'
+import { initialValues, validationSchema} from './CheckForm'
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
+import { registerUser } from '../../components/redux/_actions/user_actions';    
+function Register(props) {
+  const dispatch = useDispatch()
 
-function Register() {
+  const onSubmit=(values, { setSubmitting }) => {
 
+    setTimeout(() => {
+
+      let dataToSubmit = {
+        email: values.email,
+        password: values.password,
+        name: values.name,
+      };
+
+      dispatch(registerUser(dataToSubmit)).then(response => {
+        if (response.payload.success) {
+          console.log(response.payload.formData)
+          // props.history.push("/");
+        } else {
+          alert(response.payload.err.errmsg)
+        }
+      })
+
+      setSubmitting(false);
+    }, 500);
+  }
 
   return (
     <Formik
