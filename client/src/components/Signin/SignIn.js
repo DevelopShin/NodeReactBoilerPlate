@@ -9,10 +9,17 @@ import { Link } from 'react-router-dom'
 import React, { useState } from 'react'
 import { Formik } from "formik";
 import * as Yup from 'yup';
-
-
+import Simplert from 'react-simplert'
+import swal from 'sweetalert'  //https://sweetalert.js.org/guides/
 
 function SignIn(props) {
+  const [formErrorMessage, setFormErrorMessage] = useState('')
+  const alert =()=>{
+    swal({
+      text:'성공',
+      button: "확인",
+    });
+  }
   const initialValues = {
     email: '',
     password: '',
@@ -31,9 +38,7 @@ function SignIn(props) {
         email: values.email,
         password: values.password
       };
-      if(dataToSubmit.email==='test1@naver.com'){
-        console.log(dataToSubmit)
-      }
+      console.log(dataToSubmit.email)
 
       
       // dispatch(loginUser(dataToSubmit))
@@ -62,9 +67,11 @@ function SignIn(props) {
   return (
 
     <LoginFormWrap >
+      
       <FormContent className='loginmodal'>
         <CloseBtn><IoIosClose onClick={props.closeModal} /></CloseBtn>
         <LogoIcon >Login</LogoIcon> {/*to={'/page2'} onClick={props.closeModal} */}
+        
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -84,7 +91,7 @@ function SignIn(props) {
               handleReset,
             } = props;
             return (
-              <Form action="#">
+              <Form onSubmit={handleSubmit}>
                 <FormInput type='email' placeholder='Email' required
                   id='email'
                   name='email'
@@ -109,7 +116,8 @@ function SignIn(props) {
 
 
                 <FormButton
-                  disabled={isSubmitting} onSubmit={handleSubmit}
+                    className={!(dirty && isValid) ? "disabled-btn" : ""}
+                    disabled={!(dirty && isValid)}
                 >
                   Continue
                 </FormButton>
@@ -132,3 +140,4 @@ function SignIn(props) {
 };
 
 export default SignIn
+
