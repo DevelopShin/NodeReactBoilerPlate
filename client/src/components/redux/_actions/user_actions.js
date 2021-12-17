@@ -16,3 +16,34 @@ export function registerUser(dataToSubmit){
       payload: request
   }
 }
+
+export function loginUser(dataToSubmit){
+  const request = axios.post(`${USER_SERVER}/login`,dataToSubmit)
+      .then(response => response.data);
+  
+  return {
+      type: LOGIN_USER,
+      payload: request
+  }
+}
+
+
+export function logout(dataToSubmit){
+  const request = axios.post(`${USER_SERVER}/logout`,dataToSubmit)
+      .then(response => response.data);
+  
+  return {
+      type: LOGOUT_USER,
+      payload: request
+  }
+}
+
+export function auth(dataToSubmit){
+  const request = axios.post(`${USER_SERVER}/logout`,dataToSubmit)
+      .then(response => response.data);
+  
+  return {
+      type: AUTH_USER,
+      payload: request
+  }
+}

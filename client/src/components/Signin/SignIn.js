@@ -5,20 +5,17 @@ import {
 } from './SignElements'
 import SSocialLogin from './SocialLogin'
 import { IoIosClose } from 'react-icons/io' //close icon
-import { Link } from 'react-router-dom'
-import React, { useState } from 'react'
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import swal from 'sweetalert'  //https://sweetalert.js.org/guides/
+import { useDispatch } from "react-redux";
+import {loginUser} from '../redux/_actions/user_actions'
+import { useNavigate } from 'react-router-dom';
 
 function SignIn(props) {
-  const [formErrorMessage, setFormErrorMessage] = useState('')
-  const alert =()=>{
-    swal({
-      text:'성공',
-      button: "확인",
-    });
-  }
+  const navigator = useNavigate()
+  const dispatch = useDispatch()
+
   const initialValues = {
     email: '',
     password: '',
@@ -40,28 +37,23 @@ function SignIn(props) {
       console.log(dataToSubmit.email)
 
       
-      // dispatch(loginUser(dataToSubmit))
-      //   .then(response => {
-      //     if (response.payload.loginSuccess) {
-      //       window.localStorage.setItem('userId', response.payload.userId);
-      //       if (rememberMe === true) {
-      //         window.localStorage.setItem('rememberMe', values.id);
-      //       } else {
-      //         localStorage.removeItem('rememberMe');
-      //       }
-      //       props.history.push("/");
-      //     } else {
-      //       setFormErrorMessage('Check out your Account or Password again')
-      //     }
-      //   })
-      //   .catch(err => {
-      //     setFormErrorMessage('Check out your Account or Password again')
-      //     setTimeout(() => {
-      //       setFormErrorMessage("")
-      //     }, 3000);
-      //   });
+      dispatch(loginUser(dataToSubmit))
+        .then(response => {
+          const req= response.payload
+          if (req.success) {
+            swal({
+              icon:"success",
+              text: req.msg ? req.msg : req.err.errmsg})
+              props.closeModal()
+              navigator("/");
+        }else{ 
+          swal({
+            icon:"warning",
+            text: req.msg ? req.msg : req.err.errmsg})
+        };
     }, 500);
-  }
+  })
+}
 
   return (
 

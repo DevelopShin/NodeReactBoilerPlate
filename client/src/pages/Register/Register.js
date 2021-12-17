@@ -1,12 +1,13 @@
 import {
   Container, FormWrap, FormContent, Form,
-  FormH1, FormInput, FormButton, ErrLabel
+  FormH1, FormInput, FormButton, ErrLabel, Icon
 } from './RegisterElements'
 import React from 'react'
 import { initialValues, validationSchema} from './CheckForm'
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { registerUser } from '../../components/redux/_actions/user_actions';    
+import { registerUser } from '../../components/redux/_actions/user_actions';   
+import swal from 'sweetalert'
 function Register(props) {
   const dispatch = useDispatch()
 
@@ -22,10 +23,10 @@ function Register(props) {
 
       dispatch(registerUser(dataToSubmit)).then(response => {
         if (response.payload.success) {
-          console.log(response.payload.formData)
-          // props.history.push("/");
+          swal({icon:'success', text:'success:true'})
         } else {
-          alert(response.payload.err.errmsg)
+          swal({icon:'warning',
+            text: response.payload.msg ? response.payload.msg : response.payload.err.errmsg})
         }
       })
 

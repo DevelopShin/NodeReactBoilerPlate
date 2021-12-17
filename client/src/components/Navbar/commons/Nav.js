@@ -6,7 +6,7 @@ import {
   MobileIcon,
   NavMenu,
   NavItem,
-  NavLinks,
+  NavLinkR,
   NavBtn,
   NavBtnLink,
 
@@ -30,16 +30,16 @@ const Nav = (props) => {
           </MobileIcon>
           <NavMenu>
             <NavItem>
-              <NavLinks {...props.smoothBox} to='about'>About</NavLinks>
+              <NavLinkR {...props.smoothBox} to='/page2'>About</NavLinkR>
             </NavItem>
             <NavItem>
-              <NavLinks {...props.smoothBox} to='discover'>Discover</NavLinks>
+              <NavLinkR {...props.smoothBox} to='/iscover'>Discover</NavLinkR>
             </NavItem>
             <NavItem>
-              <NavLinks {...props.smoothBox} to='services'>Services</NavLinks>
+              <NavLinkR {...props.smoothBox} to='services'>Services</NavLinkR>
             </NavItem>
             <NavItem>
-              <NavLinks {...props.smoothBox} to='signup'>Sign Up</NavLinks>
+              <NavLinkR {...props.smoothBox} to='signup'>Sign Up</NavLinkR>
             </NavItem>
           </NavMenu>
           <NavBtn>
