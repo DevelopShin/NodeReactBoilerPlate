@@ -1,15 +1,27 @@
 const express = require('express');
 const passport = require('passport');
+const { User } = require("../models/users");
+const jwt = require('jsonwebtoken');
 
-const router = express.Router();
+let auth = (req, res, next) => {
+  let token = req.cookies.x_auth;
+  jwt.verify(token, process.env.secretOrKey,function(err, decode){
+    if(err) return res.json({
+      isAuth: false,
+      msg: '잘못된 쿠키정보 입니다.'
+    });
+    User.findOne({"_id":decode.id}, function(err, user){
+        if(err) return res.json({
+          isAuth: false,
+          msg: "캐쉬만료"
+        });
+        else{
+          req.token = token;
+          req.user = user;
+          next()
+        }
+        
+    })
+})}
 
-router.get('/', passport.authenticate('jwt', { session: false }),(req, res, info ) =>{
-  console.log(info.isAuth)
-  return res.status(200).send({
-    success: true,
-    user: req.user.id,
-    email:req.user.email
-  })
-})
-
-module.exports = router;
+module.exports = { auth };

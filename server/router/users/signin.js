@@ -13,22 +13,23 @@ router.post('/', async (req, res, next) => {
 
       if (bcrypt.compare(user.password, req.body.password)) {
 
-        const payload = { email: user.email, name: user.name, id: user.id }
+        const payload = {id: user.id }
         const token = jwt.sign(
           payload,
           process.env.secretOrKey,
           { expiresIn: '1d' })
 
         user.token = token;
+        console.log(user.token)
         user.save((err, user) => {
           if (err) return res.status(400).json({ success: false, msg: "something wrong" })
           return res.cookie("x_auth", user.token, {
             maxAge: 1000 * 60 * 60 * 24, //1-day
             httpOnly: true
-          }).json({ success: true, msg: "welcome to korea" })
+          }).json({ success: true, token:user.token, msg: "welcome to korea", userId:user._id })
 
         });
-      }else{return res.json({success:false, msg:"match not password"})}
+      }else{return res.json({success:false, msg:"not match password"})}
     })
   })
 

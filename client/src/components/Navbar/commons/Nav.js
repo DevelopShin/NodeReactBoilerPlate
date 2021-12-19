@@ -8,13 +8,38 @@ import {
   NavItem,
   NavLinkR,
   NavBtn,
-  NavBtnLink,
+  NavBtnModal,
+  NavBtnLinkR
 
 } from './NavbarElements'
 import { FaBars, FaTimes } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 import { animateScroll as scroll } from 'react-scroll'
+import { logout } from '../../redux/_actions/user_actions'
+import { useDispatch } from "react-redux";
+import swal from 'sweetalert'
 
 const Nav = (props) => {
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
+
+  const logoutHandler = () => {
+    console.log(user.userInfo.token)
+
+    dispatch(logout())
+      .then(response => {
+        if (response.payload.userInfo)
+          swal({
+            icon: response.payload.success ? "success" : "warning",
+            text: response.payload.msg && response.payload.msg
+          })
+      })
+  }
+
+
+
+
+
 
   const closeSide = () => {
     props.setisOpen(false)
@@ -39,11 +64,12 @@ const Nav = (props) => {
               <NavLinkR {...props.smoothBox} to='services'>Services</NavLinkR>
             </NavItem>
             <NavItem>
-              <NavLinkR {...props.smoothBox} to='signup'>Sign Up</NavLinkR>
+              <NavLinkR {...props.smoothBox} to='/register'>Sign Up</NavLinkR>
             </NavItem>
           </NavMenu>
           <NavBtn>
-            <NavBtnLink onClick={()=>props.setloginModal(true)}>Sign In</NavBtnLink>
+            { user.userInfo && user.userInfo.success ? <NavBtnModal onClick={logoutHandler}>Logout</NavBtnModal> 
+            : <NavBtnModal onClick={() => props.setloginModal(true)}>로그인</NavBtnModal>}
           </NavBtn>
 
         </NavbarContainer>

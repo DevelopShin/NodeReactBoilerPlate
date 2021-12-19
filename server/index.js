@@ -4,10 +4,11 @@ const path = require("path");
 const cors = require('cors')
 const mongoose = require("mongoose");
 const passport = require('passport');
-
+const cookieParser = require('cookie-parser')
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(cookieParser())
 
 
 
@@ -35,13 +36,11 @@ if (process.env.NODE_ENV === "production") {
 //===============API Router================================================//
 
 app.use('/api/users', require('./router/users/users'))
-app.use('/api/users/login', require('./router/users/login'))
-app.use('/api/auth', require('./middleware/auth'))
+app.use('/api/users/signin', require('./router/users/signin'))
 
 //===============passport================================================//
-app.use(passport.initialize())
-require('./passport/passport')
-app.get('/api/auth',require('./middleware/auth'))
+// app.use(passport.initialize())
+// require('./middleware/passport')
 
 
 

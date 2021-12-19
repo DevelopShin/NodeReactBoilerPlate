@@ -25,7 +25,7 @@ function MobileBar(props) {
                         <SidebarLink onClick={props.togle} to='about'>About</SidebarLink>
                         <SidebarLink onClick={props.togle} to='discover'>Discover</SidebarLink>
                         <SidebarLink onClick={props.togle} to='services'>Services</SidebarLink>
-                        <SidebarLink onClick={props.togle} to='signup'>Sign Up</SidebarLink>
+                        <SidebarLink onClick={props.togle} to='/register'>Sign Up</SidebarLink>
                     </SidebarMenu>
                     <SideBtnWrap onClick={props.togle}>
                         <SidebarRoute onClick={()=>props.setloginModal(true)} >sign In</SidebarRoute>
