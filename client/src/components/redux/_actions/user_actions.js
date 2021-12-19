@@ -29,7 +29,7 @@ export function loginUser(dataToSubmit){
 
 
 export function logout(dataToSubmit){
-  const request = axios.post(`${USER_SERVER}/logout`,dataToSubmit)
+  const request = axios.get(`${USER_SERVER}/logout`,dataToSubmit)
       .then(response => response.data);
   
   return {
@@ -39,7 +39,7 @@ export function logout(dataToSubmit){
 }
 
 export function auth(dataToSubmit){
-  const request = axios.post(`${USER_SERVER}/logout`,dataToSubmit)
+  const request = axios.get(`${USER_SERVER}/logout`,dataToSubmit)
       .then(response => response.data);
   
   return {

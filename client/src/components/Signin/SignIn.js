@@ -9,7 +9,7 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import swal from 'sweetalert'  //https://sweetalert.js.org/guides/
 import { useDispatch } from "react-redux";
-import {loginUser} from '../redux/_actions/user_actions'
+import { loginUser } from '../redux/_actions/user_actions'
 import { useNavigate } from 'react-router-dom';
 
 function SignIn(props) {
@@ -34,35 +34,37 @@ function SignIn(props) {
         email: values.email,
         password: values.password
       };
-      console.log(dataToSubmit.email)
 
-      
       dispatch(loginUser(dataToSubmit))
         .then(response => {
-          const req= response.payload
+          const req = response.payload
+          console.log(req)
           if (req.success) {
             swal({
-              icon:"success",
-              text: req.msg ? req.msg : req.err.errmsg})
-              props.closeModal()
-              navigator("/");
-        }else{ 
-          swal({
-            icon:"warning",
-            text: req.msg ? req.msg : req.err.errmsg})
-        };
-    }, 500);
-  })
-}
+              icon: "success",
+              text: req.msg && req.msg
+            })
+            props.closeModal()
+            navigator("/");
+          } else {
+            console.log('d에러이다')
+            swal({
+              icon: "warning",
+              text: req.msg && req.msg
+            })
+          };
+        }, 500);
+    })
+  }
 
   return (
 
     <LoginFormWrap >
-      
+
       <FormContent className='loginmodal'>
         <CloseBtn><IoIosClose onClick={props.closeModal} /></CloseBtn>
         <LogoIcon >Login</LogoIcon> {/*to={'/page2'} onClick={props.closeModal} */}
-        
+
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -107,8 +109,8 @@ function SignIn(props) {
 
 
                 <FormButton
-                    className={!(dirty && isValid) ? "disabled-btn" : ""}
-                    disabled={!(dirty && isValid)}
+                  className={!(dirty && isValid) ? "disabled-btn" : ""}
+                  disabled={!(dirty && isValid)}
                 >
                   Continue
                 </FormButton>
