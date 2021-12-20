@@ -15,30 +15,24 @@ import {
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 import { animateScroll as scroll } from 'react-scroll'
-import { logout } from '../../redux/_actions/user_actions'
+import { logout } from '../../reduxStore/_actions/user_actions'
 import { useDispatch } from "react-redux";
 import swal from 'sweetalert'
 
 const Nav = (props) => {
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-
+  // console.log("내브쪽 ",user.userInfo.success)
   const logoutHandler = () => {
-    console.log(user.userInfo.token)
-
     dispatch(logout())
       .then(response => {
-        if (response.payload.userInfo)
-          swal({
-            icon: response.payload.success ? "success" : "warning",
-            text: response.payload.msg && response.payload.msg
-          })
+
+        swal({
+          icon: response.payload.success ? "success" : "warning",
+          text: response.payload.msg && response.payload.msg
+        })
       })
   }
-
-
-
-
 
 
   const closeSide = () => {
@@ -68,8 +62,8 @@ const Nav = (props) => {
             </NavItem>
           </NavMenu>
           <NavBtn>
-            { user.userInfo && user.userInfo.success ? <NavBtnModal onClick={logoutHandler}>Logout</NavBtnModal> 
-            : <NavBtnModal onClick={() => props.setloginModal(true)}>로그인</NavBtnModal>}
+            {user.userData && !user.userData.isAuth ? <NavBtnModal onClick={() => props.setloginModal(true)}>로그인</NavBtnModal>:<NavBtnModal onClick={logoutHandler}>Logout</NavBtnModal>
+              }
           </NavBtn>
 
         </NavbarContainer>

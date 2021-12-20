@@ -5,8 +5,8 @@ import {
   LOGOUT_USER,
 } from './types';
 import axios from 'axios';
-import { USER_SERVER } from '../../Config.js';
-
+// import { USER_SERVER } from '../../Config.js';
+const USER_SERVER = '/api/users';
 export function registerUser(dataToSubmit){
   const request = axios.post(`${USER_SERVER}/register`,dataToSubmit)
       .then(response => response.data);
@@ -19,9 +19,8 @@ export function registerUser(dataToSubmit){
 
 export function loginUser(dataToSubmit){
   const request = axios.post(`${USER_SERVER}/signin`,dataToSubmit)
-      .then(response => console.log(response.data));
-      
-  
+      .then(response => response.data);
+
   return {
       type: LOGIN_USER,
       payload: request
@@ -39,8 +38,9 @@ export function logout(dataToSubmit){
   }
 }
 
+
 export function auth(dataToSubmit){
-  const request = axios.get(`${USER_SERVER}/logout`,dataToSubmit)
+  const request = axios.get(`${USER_SERVER}/auth`,dataToSubmit)
       .then(response => response.data);
   
   return {

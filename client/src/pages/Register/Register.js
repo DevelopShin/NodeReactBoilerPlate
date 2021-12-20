@@ -6,7 +6,7 @@ import React from 'react'
 import { initialValues, validationSchema} from './CheckForm'
 import { Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { registerUser } from '../../components/redux/_actions/user_actions';   
+import { registerUser } from '../../reduxStore/_actions/user_actions';   
 import swal from 'sweetalert'
 function Register(props) {
   const dispatch = useDispatch()

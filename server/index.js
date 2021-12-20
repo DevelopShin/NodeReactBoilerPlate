@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === "production") {
 
 //===============API Router================================================//
 
-app.use('/api/users', require('./router/users/users'))
+app.use('/api/users', require('./router/users/user'))
 app.use('/api/users/signin', require('./router/users/signin'))
 
 //===============passport================================================//

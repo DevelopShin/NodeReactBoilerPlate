@@ -6,7 +6,7 @@ require('dotenv').config();
 const { auth } = require('../../middleware/auth')
 
 router.get('/auth', auth, (req, res) => {
-  return res.status(200).json({
+  res.status(200).json({
     isAuth: true,
     userId: req.user._id,
     email: req.user.email,
@@ -24,7 +24,6 @@ router.post('/register', (req, res) => {
       if (err) return res.json({ success: false, err });
       return res.status(200).json({ success: true })
     })
-
   })
 })
 

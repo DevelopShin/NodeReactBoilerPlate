@@ -1,5 +1,5 @@
-import MobileBar from "../components/Navbar/commons/MobileBar";
-import Nav from "../components/Navbar/commons/Nav";
+import MobileBar from "../components/Navbar/MobileBar";
+import Nav from "../components/Navbar/Nav";
 import React, { useState, useEffect } from 'react'
 import SignIn from "../components/Signin/SignIn";
 import { LoginFormWrap } from "../components/Signin/SignElements";

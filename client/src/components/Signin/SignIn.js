@@ -9,12 +9,14 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import swal from 'sweetalert'  //https://sweetalert.js.org/guides/
 import { useDispatch } from "react-redux";
-import { loginUser } from '../redux/_actions/user_actions'
+import { loginUser } from '../../reduxStore/_actions/user_actions';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 function SignIn(props) {
   const navigator = useNavigate()
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
 
   const initialValues = {
     email: '',
@@ -38,8 +40,8 @@ function SignIn(props) {
       dispatch(loginUser(dataToSubmit))
         .then(response => {
           const req = response.payload
-          console.log(req)
-          if (req.success) {
+          if (response.payload.success) {
+
             swal({
               icon: "success",
               text: req.msg && req.msg
@@ -47,7 +49,6 @@ function SignIn(props) {
             props.closeModal()
             navigator("/");
           } else {
-            console.log('d에러이다')
             swal({
               icon: "warning",
               text: req.msg && req.msg
