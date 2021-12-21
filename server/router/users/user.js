@@ -12,6 +12,7 @@ router.get('/auth', auth, (req, res) => {
     email: req.user.email,
     role: req.user.role
   })
+  
 })
 
 

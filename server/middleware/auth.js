@@ -15,6 +15,7 @@ let auth = (req, res, next) => {
           isAuth: false,
           msg: "캐쉬만료"
         });
+
         else{
           req.token = token;
           req.user = user;

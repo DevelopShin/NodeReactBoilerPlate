@@ -9,7 +9,7 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 import swal from 'sweetalert'  //https://sweetalert.js.org/guides/
 import { useDispatch } from "react-redux";
-import { loginUser } from '../../reduxStore/_actions/user_actions';
+import { auth, loginUser } from '../../reduxStore/_actions/user_actions';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 
@@ -41,11 +41,11 @@ function SignIn(props) {
         .then(response => {
           const req = response.payload
           if (response.payload.success) {
-
             swal({
               icon: "success",
               text: req.msg && req.msg
             })
+            dispatch(auth())
             props.closeModal()
             navigator("/");
           } else {

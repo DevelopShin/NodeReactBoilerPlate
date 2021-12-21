@@ -20,7 +20,7 @@ router.post('/', async (req, res, next) => {
           { expiresIn: '1d' })
 
         user.token = token;
-        console.log(user.token)
+        console.log('signin.js :', user.token)
         user.save((err, user) => {
           if (err) return res.status(400).json({ success: false, msg: "something wrong" })
           return res.cookie("x_auth", user.token, {
